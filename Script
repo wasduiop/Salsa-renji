@@ -4,7 +4,7 @@ local window = DrRayLibrary:Load("DrRay", "Default")
 
 local tab1 = DrRayLibrary.newTab("F2P Autofarm", "ImageIdHere")
 
-tab.newToggle("Auto Coin", "Toggle! (prints the state)", false, function(toggleState)
+tab1.newToggle("Auto Coin", "Toggle! (prints the state)", false, function(toggleState)
     local state = toggleState
     if toggleState then
         print("On")
