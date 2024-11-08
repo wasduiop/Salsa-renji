@@ -30,7 +30,7 @@ local Tab1 = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
 
 local Section = Tab1:CreateSection("Section Example")
 
-local Toggle = Tab:CreateToggle({
+local Toggle = Tab1:CreateToggle({
    Name = "Toggle Name",
    CurrentValue = false,
    Flag = "ToggleCoins", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
