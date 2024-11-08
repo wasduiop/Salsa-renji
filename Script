@@ -4,10 +4,32 @@ local window = DrRayLibrary:Load("DrRay", "Default")
 
 local tab1 = DrRayLibrary.newTab("F2P Autofarm", "ImageIdHere")
 
-tab.newToggle("Toggle", "Toggle! (prints the state)", true, function(toggleState)
+tab.newToggle("Auto Coin", "Toggle! (prints the state)", false, function(toggleState)
+    local state = toggleState
     if toggleState then
         print("On")
+        state = !state
     else
         print("Off")
+        state = !state
+    end
+
+    if state then
+        local part = game.Workspace.DroppedItems.Coin
+        local pathfindingService = game:GetService("PathfindingService")
+        local path = pathfindingService:CreatePath()
+        local destination = Vector3.new(0, 5, 0)
+        path:ComputeAsync(part.Postition, destination)
+        local waypoints = path:GetWaypoints()
+        for _, waypoint in  ipairs(waypoints) do
+            local speed = 5
+            local t = 0
+            local max = (part.Postition-waypoint.Postition).Magnitude/speed
+            local waitTime = 0.1
+            while t < max do 
+                part.CFrame = part.CFrame:Lerp(CFrame.lookAt(part.CFrame.Postition, waypoint.Postition), t/max)
+                t += task.wait(waitTime)
+            end
+        end
     end
 end)
